@@ -395,4 +395,15 @@ class Mongodb extends Driver
             return false;
         }
     }
+    
+    
+    /**
+     * 获取操作的集合 增加弹性
+     *
+     * @param $collection
+     * @return \MongoCollection
+     */
+    public function getCollection($collection){
+        return $this->_db->{$collection};
+    }
 }
