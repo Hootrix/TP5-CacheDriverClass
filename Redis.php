@@ -89,7 +89,7 @@ class Redis extends R
         if ($value !== FALSE)
         {
             return array(
-                'expire' => time() + $this->_redis->ttl($key),
+                'expire' => time() + $this->handler->ttl($key),
                 'data' => $value
             );
         }
