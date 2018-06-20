@@ -250,6 +250,33 @@ class Mongodb extends Driver
 
 
 
+    /**
+     * 获取默认缓存的剩余时间 /秒
+     * @param $name
+     * @return int
+     *
+     * 参照redis：当 key 不存在时，返回 -2 。 当 key 存在但没有设置剩余生存时间时，返回 -1
+     */
+    public function ttl($name)
+    {
+        $key = $this->getCacheKey($name);
+
+        $re = $this->_db->{$this->_default_cache_collection}->findOne(array('_id' => $key));
+        if (!$re) return -2;//不存在时，返回 -2
+        $expire = $re['expire'];
+        if($expire === 0) return -1;//存在但没有设置剩余生存时间时，返回 -1
+
+        if ($_SERVER['REQUEST_TIME'] > $expire) {
+            //缓存过期删除缓存文件
+            $this->rm($name);
+            return -2;
+        }
+        return $expire - $_SERVER['REQUEST_TIME'];
+    }
+
+
+
+
     private function _id($id)
     {
         $this->_id = new \MongoId($id);
