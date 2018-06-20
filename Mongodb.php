@@ -173,7 +173,7 @@ class Mongodb extends Driver
     public function inc($name, $step = 1)
     {
         if ($this->has($name)) {
-            $value = $this->get($name) + $step;
+            $value = $this->get($name,0) + $step;
         } else {
             $value = $step;
         }
@@ -190,7 +190,7 @@ class Mongodb extends Driver
     public function dec($name, $step = 1)
     {
         if ($this->has($name)) {
-            $value = $this->get($name) - $step;
+            $value = $this->get($name,0) - $step;
         } else {
             $value = $step;
         }
