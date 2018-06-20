@@ -2,7 +2,7 @@
 
 /**
  * Created by PhpStorm.
- * User: hhtjim
+ * User: hhtji
  * Date: 2017/6/1 0001
  * Time: 10:45
  *
@@ -98,6 +98,14 @@ class Redis extends R
     }
 
     /**
+     * 获取默认缓存的剩余时间 /秒
+     */
+    public function ttl($key)
+    {
+       return $this->handler->ttl($this->getCacheKey($key));
+    }
+
+    /**
      * hset
      */
     public function hset($key,$name,$value){
@@ -139,6 +147,30 @@ class Redis extends R
      */
     public function hdel($name,$filed){
         return $this->handler->hdel($name,$filed);
+    }
+
+    /**
+     * lpush
+     */
+    public function lpush($name,$value){
+        return $this->handler->lpush($name,$value);
+    }
+    /**
+     * lpop
+     */
+    public function lpop($name){
+        return $this->handler->lpop($name);
+    }
+
+    /**
+     * llen
+     */
+    public function llen($name){
+        return $this->handler->llen($name);
+    }
+
+    public function brpop($listname,$timeout = 0){//默认0  保持永久监听
+        return $this->handler->brPop($listname,$timeout);
     }
 
 }

@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: hhtjim
+ * User: hhtji
  * Date: 2017/6/1 0001
  * Time: 11:16
  *
@@ -249,7 +249,6 @@ class Mongodb extends Driver
     }
 
 
-
     /**
      * 获取默认缓存的剩余时间 /秒
      * @param $name
@@ -273,7 +272,6 @@ class Mongodb extends Driver
         }
         return $expire - $_SERVER['REQUEST_TIME'];
     }
-
 
 
 
@@ -422,8 +420,7 @@ class Mongodb extends Driver
             return false;
         }
     }
-    
-    
+
     /**
      * 获取操作的集合 增加弹性
      *
